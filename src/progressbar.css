@@ -15,6 +15,9 @@ body {
 .progressbar__item {
 	background: #f99;
 }
+.progressbar__item--active {
+	background: #F00;
+}
 
 .progressbar__title {
 	font-weight: bold;
