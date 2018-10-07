@@ -11,21 +11,25 @@
 		p.bar = bar;
 		p.points = null;
 		p.activePoint = null;
-
 		initPoints();
 		bindEvents();
 
 		function bindEvents() {
-			// define methods
-			p.onNext = function() {
-				console.log('next...');
-			};
-			p.onPrev = function() {
-				console.log('prev...');
-			};
-			// bind methods to element
-			p.bar.next = p.onNext.bind(p.bar);
-			p.bar.prev = p.onPrev.bind(p.bar);
+			p.bar.next = onNext.bind(p.bar);
+			p.bar.prev = onPrev.bind(p.bar);
+			p.bar.pick = onPick.bind(p.bar);
+		}
+
+		function onNext() {
+			console.log('next...');
+		}
+
+		function onPrev() {
+			console.log('prev...');
+		}
+
+		function onPick(index) {
+			console.log('pick index `'+index+'`...');
 		}
 
 		function initPoints() {
