@@ -7,11 +7,17 @@
 </head>
 <body>
 	<h1>progressbar</h1>
-	<ul class="progressbar">
+	<ul class="progressbar" id="progressbar">
 		<li>Item 1 content</li>
 		<li>Content for item 2</li>
 		<li>Item 3 has the following content!</li>
 	</ul>
 	<script src="../src/progressbar.js"></script>
+	<script>
+		var progressbar = document.getElementById('progressbar');
+		progressbar.next();
+		progressbar.prev();
+		//console.log(progressbar)
+	</script>
 </body>
 </html>
