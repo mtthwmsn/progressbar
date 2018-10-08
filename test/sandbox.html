@@ -11,12 +11,25 @@
 		<li>Item 1 content</li>
 		<li>Content for item 2</li>
 		<li>Item 3 has the following content!</li>
+		<li>Item 4?!</li>
 	</ul>
+
+	<button id="prev">Previous Step</button>
+	<button id="step_1">Pick Step 1</button>
+	<button id="step_2">Pick Step 2</button>
+	<button id="step_3">Pick Step 3</button>
+	<button id="step_4">Pick Step 4</button>
+	<button id="next">Next Step</button>
+
 	<script src="../src/progressbar.js"></script>
 	<script>
 		var progressbar = document.getElementById('progressbar');
-		progressbar.pick(99);
-		progressbar.prev();
+		document.getElementById('prev').addEventListener('click', progressbar.prev);
+		document.getElementById('next').addEventListener('click', progressbar.next);
+		document.getElementById('step_1').addEventListener('click', () => {progressbar.pick(1)});
+		document.getElementById('step_2').addEventListener('click', () => {progressbar.pick(2)});
+		document.getElementById('step_3').addEventListener('click', () => {progressbar.pick(3)});
+		document.getElementById('step_4').addEventListener('click', () => {progressbar.pick(4)});
 	</script>
 </body>
 </html>
