@@ -24,12 +24,19 @@
 	<script src="../src/progressbar.js"></script>
 	<script>
 		var progressbar = document.getElementById('progressbar');
+		progressbar.addEventListener("change", function() {
+			console.log("Progress Bar has changed");
+		});
 		document.getElementById('prev').addEventListener('click', progressbar.prev);
 		document.getElementById('next').addEventListener('click', progressbar.next);
-		document.getElementById('step_1').addEventListener('click', () => {progressbar.pick(1)});
-		document.getElementById('step_2').addEventListener('click', () => {progressbar.pick(2)});
-		document.getElementById('step_3').addEventListener('click', () => {progressbar.pick(3)});
-		document.getElementById('step_4').addEventListener('click', () => {progressbar.pick(4)});
+		document.getElementById('step_1').addEventListener('click', () => {progressbar.pick(0)});
+		document.getElementById('step_2').addEventListener('click', () => {progressbar.pick(1)});
+		document.getElementById('step_3').addEventListener('click', () => {progressbar.pick(2)});
+		document.getElementById('step_4').addEventListener('click', () => {
+			progressbar.pick(3, function(p) {
+				console.log('Step '+(p.activePointIndex + 1)+' picked');
+			});
+		});
 	</script>
 </body>
 </html>
