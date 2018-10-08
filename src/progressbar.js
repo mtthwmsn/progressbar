@@ -32,18 +32,18 @@
 		}
 
 		function onPick(point) {
-			console.log('pick `'+point+'`...');
-			pick(point - 1);
+			let pointIndex = Math.min(Math.max((point - 1), 0), p.maxIndex);
+			if (p.activePointIndex !== pointIndex) {
+				pick(pointIndex);
+			}
 		}
 
 		function pick(index) {
 			p.points.forEach((point, i) => {
-				if (i === index) {
+				if (i === index)
 					setActivePoint(point);
-				}
-				else {
+				else
 					delete point.dataset.active;
-				}
 			});
 		}
 
