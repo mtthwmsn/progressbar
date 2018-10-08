@@ -5,11 +5,13 @@
 	progressbar.forEach(bar => new Progressbar(bar));
 
 	function Progressbar(bar) {
-		var p = {};
+		// define `p` object and all parameters associated to it
+		var p = [
+			'bar', 'points', 'pointCount', 'activePoint',
+			'nextPointIndex', 'prevPointIndex'
+		].reduce((p, param) => { p[ param ] = null; return p; }, {});
+
 		p.bar = bar;
-		p.points = null;
-		p.pointCount = null;
-		p.activePoint = null;
 		initPoints();
 		bindEvents();
 
