@@ -11,7 +11,7 @@ Create an unordered list `<ul>` with the class `progressbar`
 </ul>
 ```
 
-## Methods
+## Methods
 
 ### `next()`
 
