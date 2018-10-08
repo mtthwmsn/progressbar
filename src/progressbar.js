@@ -15,52 +15,20 @@
     // define `p` object and all parameters associated to it
     var p = [
       "bar", "points", "pointCount", "activePoint", "maxIndex",
-      "activePointIndex", "nextPointIndex", "prevPointIndex"
+      "activePointIndex", "nextPointIndex", "prevPointIndex", "onChange"
     ].reduce((p, param) => { p[ param ] = null; return p; }, {});
 
     // assign progress bar element to the object
     p.bar = bar;
+    // create a new event for `change` of progress bar
+    p.onChange = new Event('change');
     // initialise all the points on the progress bar
     initPoints();
     // bind and expose methods to the progress bar
     //   usage: `document.getElementById('progressbar').next();`
-    p.bar.next = onNext.bind(p.bar);
-    p.bar.prev = onPrev.bind(p.bar);
-    p.bar.pick = onPick.bind(p.bar);
-
-    /**
-     * onNext() contains logic to move the progress bar on to the next point
-     *
-     * @return void
-     */
-    function onNext() {
-      if (p.activePointIndex !== p.nextPointIndex) {
-        pick(p.nextPointIndex);
-      }
-    }
-
-    /**
-     * onPrev() contains logic to move the progress bar back to the last point
-     *
-     * @return void
-     */
-    function onPrev() {
-      if (p.activePointIndex !== p.prevPointIndex) {
-        pick(p.prevPointIndex);
-      }
-    }
-
-    /**
-     * onPick() contains logic to move the progress bar to the requested point
-     *
-     * @return void
-     */
-    function onPick(point) {
-      let pointIndex = Math.min(Math.max((point - 1), 0), p.maxIndex);
-      if (p.activePointIndex !== pointIndex) {
-        pick(pointIndex);
-      }
-    }
+    p.bar.next = __next.bind(p.bar);
+    p.bar.prev = __prev.bind(p.bar);
+    p.bar.pick = __pick.bind(p.bar);
 
     /**
      * pick() iterates all points and activates the requested index then
@@ -70,11 +38,52 @@
      */
     function pick(index) {
       p.points.forEach((point, i) => {
-      if (i === index)
-        __setActivePoint(point);
-      else
-        delete point.dataset.active;
+        if (i === index)
+          __setActivePoint(point);
+        else
+          delete point.dataset.active;
       });
+      p.bar.dispatchEvent(p.onChange);
+    }
+
+    /**
+     * __next() contains logic to move the progress bar on to the next point
+     *
+     * @param fn callback
+     * @return void
+     */
+    function __next(callback) {
+      if (p.activePointIndex !== p.nextPointIndex) {
+        pick(p.nextPointIndex);
+        if (typeof callback === "function") callback(p);
+      }
+    }
+
+    /**
+     * __prev() contains logic to move the progress bar back to the last point
+     *
+     * @param fn callback
+     * @return void
+     */
+    function __prev(callback) {
+      if (p.activePointIndex !== p.prevPointIndex) {
+        pick(p.prevPointIndex);
+        if (typeof callback === "function") callback(p);
+      }
+    }
+
+    /**
+     * __pick() contains logic to move the progress bar to the requested point
+     *
+     * @param int point
+     * @param fn callback
+     * @return void
+     */
+    function __pick(point, callback) {
+      if (p.activePointIndex !== point) {
+        pick(point);
+        if (typeof callback === "function") callback(p);
+      }
     }
 
     /**
