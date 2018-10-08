@@ -15,7 +15,7 @@ body {
 .progressbar__item {
 	background: #f99;
 }
-.progressbar__item--active {
+.progressbar__item[data-active] {
 	background: #F00;
 }
 
