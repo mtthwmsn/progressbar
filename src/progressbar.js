@@ -7,12 +7,15 @@
 	function Progressbar(bar) {
 		// define `p` object and all parameters associated to it
 		var p = [
-			'bar', 'points', 'pointCount', 'activePoint',
-			'nextPointIndex', 'prevPointIndex'
+			'bar', 'points', 'pointCount', 'activePoint', 'maxIndex',
+			'activePointIndex', 'nextPointIndex', 'prevPointIndex'
 		].reduce((p, param) => { p[ param ] = null; return p; }, {});
 
+		// assign progress bar element to the object
 		p.bar = bar;
+		// initialise all the points on the progress bar
 		initPoints();
+		// bind custom events to the progress bar
 		bindEvents();
 
 		function bindEvents() {
@@ -58,11 +61,10 @@
 		}
 
 		function initPoints() {
-			let activePointIndex = null;
-			let points = Array.from(p.bar.getElementsByTagName('li'));
-			points.forEach((point, i) => {
+			p.points = Array.from(p.bar.getElementsByTagName('li'));
+			p.points.forEach((point, i) => {
 				// define active index
-				if (point.dataset.active && activePointIndex === null) activePointIndex = i;
+				if (point.dataset.active && p.activePointIndex === null) p.activePointIndex = i;
 				// prep each point
 				point.className = point.className.concat(' progressbar__item').trim();
 				let c = point.innerHTML;
@@ -78,10 +80,9 @@
 				w.innerHTML = c;
 				point.append(w);
 			});
-			p.points = points;
 			p.pointCount = p.points.length;
 			p.maxIndex = p.pointCount - 1;
-			pick(activePointIndex||0);
+			pick(p.activePointIndex||0);
 		}
 	}
 })();
