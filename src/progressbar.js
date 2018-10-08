@@ -21,7 +21,7 @@
     // assign progress bar element to the object
     p.bar = bar;
     // create a new event for `change` of progress bar
-    p.onChange = new Event('change');
+    p.onChange = new Event("change");
     // initialise all the points on the progress bar
     initPoints();
     // bind and expose methods to the progress bar
@@ -34,15 +34,11 @@
      * pick() iterates all points and activates the requested index then
      * deactivates all other points. Always use this method to activate a point.
      *
+     * @param int index
      * @return void
      */
     function pick(index) {
-      p.points.forEach((point, i) => {
-        if (i === index)
-          __setActivePoint(point);
-        else
-          delete point.dataset.active;
-      });
+      p.points.forEach((point, i) => __setActivePoint(point, (i === index)));
       p.bar.dispatchEvent(p.onChange);
     }
 
@@ -87,18 +83,28 @@
     }
 
     /**
-     * __setActivePoint() sets the requested point as the active point and sets
-     * indexes for active, next and previous points. It should only be called
-     * via the `pick()` method to ensure other points are deactivated.
+     * __setActivePoint() if `active` is true, sets the requested point as the
+     * active point and sets indexes for active, next and previous points. If
+     * `active` is false then removes active status from this point
      *
+     * This method  should only be called via the `pick()` method to ensure
+     * other points are deactivated.
+     *
+     * @param object point
+     * @param active bool
      * @return void
      */
-    function __setActivePoint(point) {
-      p.activePoint = point;
-      p.activePointIndex = p.points.indexOf(point);
-      p.nextPointIndex = Math.min((p.activePointIndex + 1), p.maxIndex);
-      p.prevPointIndex = Math.max((p.activePointIndex - 1), 0);
-      point.dataset.active = 1;
+    function __setActivePoint(point, active) {
+      if (active === true) {
+        p.activePoint = point;
+        p.activePointIndex = p.points.indexOf(point);
+        p.nextPointIndex = Math.min((p.activePointIndex + 1), p.maxIndex);
+        p.prevPointIndex = Math.max((p.activePointIndex - 1), 0);
+        point.dataset.active = 1;
+      }
+      else {
+        delete point.dataset.active;
+      }
     }
 
     /**
