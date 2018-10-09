@@ -37,7 +37,7 @@ document.getElementById('progressbar').next(function(p) {
 });
 ```
 *This method will have no effect (and any callback will not be executed) if the
-progress bar has reached the end and there is no next point.*
+progress bar has reached the end.*
 
 ### `prev(fn callback())`
 
@@ -50,13 +50,13 @@ document.getElementById('progressbar').prev(function(p) {
 });
 
 ```
-*This method will have no effects (and callback will not be executed) if the
+*This method will have no effect (and callback will not be executed) if the
 progress bar is still at the start.*
 
 ### `pick(int stepNumber, fn callback())`
 
-Use `pick()` to move the progress bar to the requested `stepNumber`. The
-following example moves the progress bar to step 2.
+Use `pick()` to move the progress bar to the requested `stepNumber`. Provide
+zero-based index for `stepNumber`.
 
 ```js
 document.getElementById('progressbar').pick(1);
