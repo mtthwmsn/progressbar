@@ -51,7 +51,7 @@ document.getElementById('progressbar').prev(function(p) {
 ```
 *If the progress bar is still at the start this method will have no effect.*
 
-### `pick(stepNumber, fn callback())`
+### `pick(int stepNumber, fn callback())`
 
 Use `pick()` to move the progress bar to the requested `stepNumber`. The following example moves the progress bar to step 2.
 
