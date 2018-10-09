@@ -116,25 +116,10 @@
     function initPoints() {
       p.points = Array.from(p.bar.getElementsByTagName("li"));
       p.points.forEach((point, i) => {
-        // define active index
-        if (point.dataset.active && p.activePointIndex === null) {
-          p.activePointIndex = i;
-        }
-        // prep each point
         point.className = point.className.concat(" progressbar__item").trim();
-        let c = point.innerHTML;
-        point.innerHTML = "";
-        // construct step title
-        let s = document.createElement("DIV");
-        s.className  = "progressbar__title";
-        s.innerHTML  = (p.bar.dataset.stepPrefix || "Step").trim();
-        s.innerHTML += " "+(i + 1);
-        point.append(s);
-        // construct wrapper for content
-        let w = document.createElement("DIV");
-        w.className = "progressbar__content";
-        w.innerHTML = c;
-        point.append(w);
+        // define active index
+        if (point.dataset.active && p.activePointIndex === null)
+          p.activePointIndex = i;
       });
       p.pointCount = p.points.length;
       p.maxIndex = p.pointCount - 1;
