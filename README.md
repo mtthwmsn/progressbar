@@ -15,8 +15,8 @@ Create an unordered list `<ul>` with the class `progressbar`
 
 ### `change`
 
-`change` is an exposed event, triggered every time the point on the progress bar
-is updated.
+`change` is an exposed event. It is triggered every time the active point on the
+progress bar is updated.
 
 ```js
 document.getElementById('progressbar').addEventListener("change", function() {
@@ -28,7 +28,7 @@ document.getElementById('progressbar').addEventListener("change", function() {
 
 ### `next(fn callback())`
 
-Use `next()` to move the progress bar on the next point.
+Use `next()` to move the progress bar on to the next point.
 
 ```js
 document.getElementById('progressbar').next();
@@ -36,7 +36,8 @@ document.getElementById('progressbar').next(function(p) {
 	alert('next point selected');
 });
 ```
-*If the progress bar has reached the end and there is no next point this method will have no effect.*
+*This method will have no effect (and any callback will not be executed) if the
+progress bar has reached the end and there is no next point.*
 
 ### `prev(fn callback())`
 
@@ -49,11 +50,13 @@ document.getElementById('progressbar').prev(function(p) {
 });
 
 ```
-*If the progress bar is still at the start this method will have no effect.*
+*This method will have no effects (and callback will not be executed) if the
+progress bar is still at the start.*
 
 ### `pick(int stepNumber, fn callback())`
 
-Use `pick()` to move the progress bar to the requested `stepNumber`. The following example moves the progress bar to step 2.
+Use `pick()` to move the progress bar to the requested `stepNumber`. The
+following example moves the progress bar to step 2.
 
 ```js
 document.getElementById('progressbar').pick(1);
@@ -61,4 +64,5 @@ document.getElementById('progressbar').pick(1, function(p) {
 	alert('point '+p.activePointIndex+' selected');
 });
 ```
-*If the requested number exceeds to the number of steps, the final step will be picked. If the requested number is below 0, the first step will be picked.*
+*If the requested number exceeds to the number of steps, the final step will be
+picked. If the requested number is below 0, the first step will be picked.*
